@@ -17,13 +17,17 @@ namespace Tetris
 
         }
 
-        public void Draw(int x, int y, char c)
+        public Point(int x, int y, char c)
         {
             this.X = x;
             this.Y = y;
             this.C = c;
-            Console.SetCursorPosition(x, y);
-            Console.Write(c);
+        }
+
+        public void Draw()
+        {
+            Console.SetCursorPosition(X, Y);
+            Console.Write(C);
         }
     }
 }
