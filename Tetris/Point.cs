@@ -8,9 +8,9 @@ namespace Tetris
 {
     class Point
     {
-        int X { get; set; }
-        int Y { get; set; }
-        char C;
+        public int x;
+        public int y;
+        public char c;
 
         public Point()
         {
@@ -19,15 +19,37 @@ namespace Tetris
 
         public Point(int x, int y, char c)
         {
-            this.X = x;
-            this.Y = y;
-            this.C = c;
+            this.x = x;
+            this.y = y;
+            this.c = c;
         }
 
         public void Draw()
         {
-            Console.SetCursorPosition(X, Y);
-            Console.Write(C);
+            Console.SetCursorPosition(x, y);
+            Console.Write(c);
+        }
+
+        internal void Move(Direction dir)
+        {
+            switch (dir)
+            {
+                case Direction.DOWN:
+                    y += 1;
+                    break;
+                case Direction.LEFT:
+                    x -= 1;
+                    break;
+                case Direction.RIGHT:
+                    x += 1;
+                    break;
+            }
+        }
+
+        internal void Hide()
+        {
+            Console.SetCursorPosition(x, y);
+            Console.WriteLine(" ");
         }
     }
 }
