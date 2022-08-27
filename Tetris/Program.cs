@@ -7,29 +7,43 @@ namespace Tetris
     {
         static void Main(string[] args)
         {
-            Console.SetWindowSize(40, 30);
-            Console.SetBufferSize(40, 30);
+            Console.SetWindowSize(Field.WIDTH, Field.HEIGHT);
+            Console.SetBufferSize(Field.WIDTH, Field.HEIGHT);
 
-            Figure s = new Stick(15, 5, '*');
-            s.Draw();
+            FigureGenerator generator = new FigureGenerator(20, 0, '#');
+            Figure currentFigure = generator.GetNewFigure();
 
-            Thread.Sleep(2000);
-
-            s.Hide();
-            s.Move(Direction.LEFT);
-            s.Draw();
-            Thread.Sleep(1000);
-
-            s.Hide();
-            s.Rotate();
-            s.Draw();
-            Thread.Sleep(1000);
-
-            s.Hide();
-            s.Rotate();
-            s.Draw();
+            while (true)
+            {
+                if (Console.KeyAvailable)
+                {
+                    var key = Console.ReadKey();
+                    HandleKey(currentFigure, key);
+                }
+            }
 
             Console.ReadKey();
         }
+
+        private static void HandleKey(Figure currentFigure, ConsoleKeyInfo key)
+        {
+            switch (key.Key)
+            {
+                case ConsoleKey.LeftArrow:
+                    currentFigure.TryMove(Direction.LEFT);
+                    break;
+                case ConsoleKey.RightArrow:
+                    currentFigure.TryMove(Direction.RIGHT);
+                    break;
+                case ConsoleKey.DownArrow:
+                    currentFigure.TryMove(Direction.DOWN);
+                    break;
+                case ConsoleKey.Spacebar:
+                    currentFigure.TryRotate();
+                    break;
+            }
+        }
+
+
     }
 }
