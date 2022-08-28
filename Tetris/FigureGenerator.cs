@@ -17,8 +17,8 @@ namespace Tetris
         public FigureGenerator(int x, int y, char c)
         {
             this._x = x;
-            _y = y;
-            _c = c;
+            this._y = y;
+            this._c = c;
         }
 
         public Figure GetNewFigure()
